@@ -28,6 +28,9 @@ This project aims to support ZIP file processing, firmware file filtering, and u
 | F09 | Log or status message display (success/fail info) | Medium | 🔲 TBD |
 | F10 | Output path display and open folder button | Medium | 🔲 TBD |
 | F11 | "New Task" button to reset UI and allow new input | Medium   | 🔲 TBD |
+| F12 | Database folder management for output organization | Medium | 🔲 TBD |
+| F13 | Duplicate folder detection and warning system | Medium | 🔲 TBD |
+| F14 | Overwrite confirmation for existing folders | Medium | 🔲 TBD |
 
 
 
@@ -43,92 +46,92 @@ This project aims to support ZIP file processing, firmware file filtering, and u
 
 ## 3. Use Cases
 
-### 🟦 Use Case: Load Two ZIP Files
+### 🟦 Use Case: Input Files and Variant
 **Actor**: Developer  
-**Trigger**: User selects or drags & drops ZIP files into the application  
+**Trigger**: User starts the application  
 
 **Main Flow**:
 1. User opens the application.
 2. Selects or drags & drops **exactly two** `.zip` files.
 3. Application verifies file types and counts.
-4. Valid files are temporarily prepared for extraction.
+4. User inputs a Car Variant string.
+5. Valid files and variant are prepared for processing.
 
 **Exceptions**:
 - Less than two or more than two files selected → show validation error.
 - Non-ZIP files selected → show validation error.
-- Corrupted or unreadable ZIP file → show error message (via log/status area).
+- Corrupted or unreadable ZIP file → show error message.
+- Empty variant input → prompt for required field.
 
 ---
 
-### 🟦 Use Case: Input Car Variant
-**Actor**: Developer  
-**Trigger**: After selecting ZIP files  
-
-**Main Flow**:
-1. User selects or types in a Car Variant string.
-2. Application stores the selected variant for use in filtering logic.
-
-**Exceptions**:
-- Empty input → prompt for required field.
-- (Optional) Unsupported variant value → show warning (validation rule TBD).
-
----
-
-### 🟦 Use Case: Start Processing and Extract Firmware Files
+### 🟦 Use Case: Process and Extract Firmware Files
 **Actor**: Developer  
 **Trigger**: User clicks the **Start** button  
 
 **Main Flow**:
-1. Application parses the contents of the two ZIP files.
-2. Extracts all files into a temporary directory.
-3. Based on the selected Car Variant, the program filters necessary firmware files (`.hex`, `.s19`, etc.).
-4. Extracted files are saved to a structured output folder under the predefined path.
-5. A log/status message is displayed in the GUI showing success.
+1. Application checks for duplicate folders in Database directory.
+2. If duplicate detected, shows warning with existing folder path.
+3. Application parses the contents of the two ZIP files.
+4. Extracts all files into a temporary directory.
+5. Filters necessary firmware files (`.hex`, `.s19`, etc.) based on Car Variant.
+6. Creates output folder structure under Database folder.
+7. If duplicate exists and user clicks Start again, overwrites existing folder.
+8. Displays success message and output path.
 
 **Exceptions**:
 - No matching firmware files found → show warning.
 - Output directory inaccessible → show error and abort.
+- Existing folder locked/in use → show error and abort.
+- Database folder creation fails → show error and abort.
 
 > ℹ️ Car Variant-based filtering logic is **TBD** and will be implemented later.
 
 ---
 
-### 🟦 Use Case: View Result and Open Output Folder
+### 🟦 Use Case: View Results and Manage Output
 **Actor**: Developer  
 **Trigger**: After processing completes  
 
 **Main Flow**:
 1. Output folder path is displayed on the screen.
-2. User clicks “Open Folder” button to launch the system file explorer at the output path.
-3. Log/status area displays process summary and any warnings.
-4. User clicks **“New Task”** button to reset the GUI and clear previous results.
+2. User clicks "Open Folder" button to launch the system file explorer.
+3. Log/status area displays process summary, warnings, and any errors.
+4. User clicks **"New Task"** button to reset the GUI and clear previous results.
 
 **Exceptions**:
 - Output folder not found or permission denied → show error message.
-- Reset fails due to locked resources or UI state → show error and suggest app restart.
-
+- Reset fails due to locked resources → show error and suggest app restart.
 
 ---
 
-### 🟦 Use Case: Log and Status Display
+### 🟦 Use Case: Real-time Status and Logging
 **Actor**: Developer  
-**Trigger**: During or after any major operation  
+**Trigger**: During any major operation  
 
 **Main Flow**:
-1. Application shows real-time status messages (ZIP validation, extraction steps, success/failure).
-2. Errors and warnings are clearly shown in a log area.
-3. Status text is optionally color-coded or timestamped.
+1. Application shows real-time status messages (validation, extraction, success/failure).
+2. Errors and warnings are clearly displayed in the log area.
+3. Status text is color-coded and timestamped for better readability.
+4. Duplicate folder warnings include existing folder path and modification date.
+
+**Exceptions**:
+- Log display fails → continue processing with minimal feedback.
 
 
 ## 4. Non-Functional Requirements
 
-| Category | Description |
-|----------|-------------|
-| Platform | Windows 10+ |
-| Performance | Process ZIP < 5 sec (avg 500MB build) |
-| Framework | Python (PySide6)
-| Usability | GUI should work without tutorial |
-| Localization | English only (for v1) |
+| Category      | Description                                                        |
+|---------------|--------------------------------------------------------------------|
+| Platform      | Windows 10 or higher                                               |
+| Framework     | Python (PySide6)                                                   |
+| Performance   | Process ZIP files (avg 500MB) within 5 seconds                     |
+| Usability & UX| Intuitive drag-and-drop GUI, no tutorial required, clear feedback  |
+| Localization  | English only (v1)                                                  |
+| Storage & File Handling | Organized database folder, duplicate detection, safe overwrite |
+| Error Handling & Logging | Clear error messages, real-time color-coded logs with timestamps |
+| Security      | Safe file operations with permission checks                        |
+| Scalability & Reliability | Efficient handling of 2 ZIP files/session, robust against file/folder issues |
 
 ---
 
