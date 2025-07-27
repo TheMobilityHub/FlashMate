@@ -1,0 +1,132 @@
+#!/usr/bin/env python3
+"""
+FlashMate Unified Run Manager
+"""
+import sys
+import subprocess
+import os
+from pathlib import Path
+
+def print_banner():
+    print("=" * 50)
+    print("    FlashMate - Firmware Extraction Tool")
+    print("=" * 50)
+    print()
+
+def check_venv():
+    if not hasattr(sys, 'real_prefix') and not (hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix):
+        print("Virtual environment is not activated.")
+        print("Please run env_config.bat first.")
+        input("Press Enter to exit...")
+        return False
+    return True
+
+def run_program():
+    print("Running FlashMate...")
+    print()
+    try:
+        project_root = Path(__file__).parent
+        src_path = project_root / "src"
+        sys.path.insert(0, str(src_path))
+        from main import main as app_main
+        app_main()
+    except ImportError as e:
+        print(f"Module import error: {e}")
+        print("Make sure your virtual environment is activated.")
+        input("Press Enter to exit...")
+        return False
+    except Exception as e:
+        print(f"Runtime error: {e}")
+        input("Press Enter to exit...")
+        return False
+    return True
+
+def build_program():
+    print("Starting FlashMate build...")
+    print()
+    try:
+        build_script = Path(__file__).parent / "build" / "scripts" / "build.py"
+        if not build_script.exists():
+            print("Build script not found.")
+            input("Press Enter to exit...")
+            return False
+        result = subprocess.run([sys.executable, str(build_script)], 
+                              capture_output=True, text=True, encoding='utf-8')
+        if result.returncode == 0:
+            print("Build completed!")
+            print(f"Executable location: build/dist/FlashMate.exe")
+        else:
+            print("Build failed:")
+            print(result.stderr)
+        input("Press Enter to continue...")
+        return True
+    except Exception as e:
+        print(f"Build error: {e}")
+        input("Press Enter to exit...")
+        return False
+
+def clean_project():
+    print("Starting FlashMate project clean...")
+    print()
+    try:
+        clean_script = Path(__file__).parent / "scripts" / "clean.py"
+        if not clean_script.exists():
+            print("Clean script not found.")
+            input("Press Enter to exit...")
+            return False
+        result = subprocess.run([sys.executable, str(clean_script)], 
+                              capture_output=True, text=True, encoding='utf-8')
+        if result.returncode == 0:
+            print("Clean completed!")
+        else:
+            print("Clean failed:")
+            print(result.stderr)
+        input("Press Enter to continue...")
+        return True
+    except Exception as e:
+        print(f"Clean error: {e}")
+        input("Press Enter to exit...")
+        return False
+
+def show_menu():
+    print("Please select one of the following options:")
+    print()
+    print("[1] Run Program    - Run the application")
+    print("[2] Build          - Build executable")
+    print("[3] Clean          - Clean project")
+    print("[4] Exit           - Exit")
+    print()
+
+def get_user_choice():
+    while True:
+        try:
+            choice = input("Select (1-4): ").strip()
+            if choice in ['1', '2', '3', '4']:
+                return choice
+            else:
+                print("Please select between 1 and 4.")
+        except KeyboardInterrupt:
+            print("\n\nExiting program.")
+            sys.exit(0)
+
+def main():
+    if not check_venv():
+        return 1
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print_banner()
+        show_menu()
+        choice = get_user_choice()
+        if choice == '1':
+            run_program()
+        elif choice == '2':
+            build_program()
+        elif choice == '3':
+            clean_project()
+        elif choice == '4':
+            print("Exiting program.")
+            break
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main()) 

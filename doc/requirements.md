@@ -142,3 +142,58 @@ This project aims to support ZIP file processing, firmware file filtering, and u
 | Jul 13 | Initial Setup | Repo, basic GUI, ZIP loader |
 | Jul 20 | Core MVP | Extract, filter, export |
 | Jul 31 | Demo Ready | Clean UI, simple installer |
+
+## 🎉 프로젝트 구조 생성 완료!
+
+FlashMate 프로젝트의 모든 폴더와 파일이 성공적으로 생성되었습니다!
+
+### 📁 생성된 구조 요약:
+
+```
+FlashMate/
+├── 📁 src/                          # 소스 코드
+│   ├── 📁 main.py                   # 🚀 메인 애플리케이션
+│   ├── 📁 ui/                       # UI 관련 모듈
+│   │   ├── 📁 ui_files/             # Qt Designer .ui 파일들
+│   │   ├── 📁 ui_classes/           # UI 클래스들
+│   │   └── 📁 resources/            # 리소스 (아이콘, 스타일 등)
+│   ├── 📁 core/                     # 핵심 비즈니스 로직
+│   ├── 📁 utils/                    # 유틸리티 (constants.py 포함)
+│   └── 📁 models/                   # 데이터 모델
+├── 📁 build/                        # 빌드 관련
+│   ├── 📁 scripts/                  # 빌드 스크립트
+│   ├── 📁 config/                   # 빌드 설정
+│   └── 📁 dist/                     # 빌드 결과물
+├── 📁 scripts/                      # 관리 스크립트
+│   └── 📁 clean.py                  # 정리 스크립트
+├── 📁 sample_data/                  # 테스트용 샘플 데이터
+├── 📁 .vscode/                      # VS Code 설정
+├── 📁 env_config.bat               # 🚀 환경 설정
+├── 📁 run.py                       # 🎯 통합 실행 관리자
+├── 📁 requirements.txt              # Python 의존성
+├── 📁 pyproject.toml               # 프로젝트 설정
+├── 📁 setup.py                     # 패키지 설정
+├──  .pre-commit-config.yaml      # 코드 품질 관리
+└── 📁 README.md                    # 프로젝트 설명
+```
+
+###  다음 단계:
+
+1. **환경 설정 실행:**
+   ```cmd
+   env_config.bat
+   ```
+
+2. **개발 시작:**
+   ```cmd
+   python run.py
+   ```
+
+3. **메뉴에서 선택:**
+   - [1] Run Program - 애플리케이션 실행
+   - [2] Build - 실행파일 빌드
+   - [3] Clean - 프로젝트 정리
+   - [4] Exit - 종료
+
+이제 Qt Designer로 UI를 만들고, 각 모듈을 구현하면 됩니다! 모든 기본 구조가 준비되었습니다. 🎯
+
