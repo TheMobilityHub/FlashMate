@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1400</width>
-    <height>900</height>
+    <width>1000</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,24 +15,24 @@
   </property>
   <property name="styleSheet">
    <string>QMainWindow {
-    background-color: #f5f5f5;
+    background-color: #f8fafc;
 }
 QGroupBox {
-    border: 2px solid #e0e0e0;
+    border: 1px solid #e2e8f0;
     border-radius: 8px;
-    margin-top: 10px;
-    padding-top: 10px;
-    font-weight: bold;
-    color: #333;
+    margin-top: 6px;
+    padding-top: 6px;
+    font-weight: 600;
+    color: #334155;
 }
 QGroupBox::title {
     subcontrol-origin: margin;
-    left: 10px;
-    padding: 0 8px 0 8px;
-    background-color: #f5f5f5;
+    left: 8px;
+    padding: 0 6px 0 6px;
+    background-color: #f8fafc;
 }
 QPushButton {
-    background-color: #0078d4;
+    background-color: #3b82f6;
     color: white;
     border: none;
     border-radius: 6px;
@@ -40,54 +40,72 @@ QPushButton {
     font-weight: 500;
 }
 QPushButton:hover {
-    background-color: #106ebe;
+    background-color: #2563eb;
 }
 QPushButton:pressed {
-    background-color: #005a9e;
+    background-color: #1d4ed8;
 }
 QPushButton:disabled {
-    background-color: #cccccc;
-    color: #666666;
+    background-color: #cbd5e1;
+    color: #64748b;
 }
 QLineEdit {
-    border: 2px solid #e0e0e0;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
     padding: 8px;
     background-color: white;
 }
 QLineEdit:focus {
-    border-color: #0078d4;
+    border-color: #3b82f6;
+}
+QComboBox {
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: white;
+}
+QComboBox:focus {
+    border-color: #3b82f6;
+}
+QComboBox::drop-down {
+    border: none;
+}
+QComboBox::down-arrow {
+    image: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #64748b;
 }
 QTextEdit {
-    border: 2px solid #e0e0e0;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
     background-color: white;
 }
 QProgressBar {
-    border: 2px solid #e0e0e0;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
     text-align: center;
-    background-color: #f0f0f0;
+    background-color: #f1f5f9;
 }
 QProgressBar::chunk {
-    background-color: #0078d4;
+    background-color: #3b82f6;
     border-radius: 4px;
 }
 QTableWidget {
-    border: 2px solid #e0e0e0;
+    border: 1px solid #cbd5e1;
     border-radius: 6px;
     background-color: white;
-    gridline-color: #f0f0f0;
+    gridline-color: #f1f5f9;
 }
 QTableWidget::item {
     padding: 8px;
 }
 QTableWidget::item:selected {
-    background-color: #e3f2fd;
-    color: #333;
+    background-color: #dbeafe;
+    color: #334155;
 }
 QLabel {
-    color: #333;
+    color: #475569;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -108,431 +126,191 @@ QLabel {
      <number>20</number>
     </property>
     <item>
-     <layout class="QHBoxLayout" name="topSection">
-      <property name="spacing">
-       <number>20</number>
+     <widget class="QGroupBox" name="inputGroup">
+      <property name="title">
+       <string>Input</string>
       </property>
-      <item>
-       <widget class="QGroupBox" name="fileInputGroup">
-        <property name="title">
-         <string>Input Files</string>
-        </property>
-        <layout class="QVBoxLayout" name="fileInputLayout">
+      <layout class="QHBoxLayout" name="inputLayout">
+       <property name="spacing">
+        <number>20</number>
+       </property>
+       <item>
+        <layout class="QVBoxLayout" name="fileSection">
          <property name="spacing">
           <number>12</number>
          </property>
          <item>
-          <widget class="QLabel" name="fileInputLabel">
+          <widget class="QLabel" name="file1Label">
            <property name="text">
-            <string>Select exactly 2 ZIP files for processing</string>
-           </property>
-           <property name="styleSheet">
-            <string>color: #666; font-size: 12px;</string>
+            <string>File 1</string>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="file1Container">
-           <property name="spacing">
-            <number>8</number>
+          <widget class="QLineEdit" name="file1Path">
+           <property name="readOnly">
+            <bool>true</bool>
            </property>
-           <item>
-            <widget class="QLabel" name="file1Label">
-             <property name="text">
-              <string>File 1</string>
-             </property>
-             <property name="styleSheet">
-              <string>font-weight: bold; color: #0078d4;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="file1Layout">
-             <item>
-              <widget class="QLineEdit" name="file1Path">
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-               <property name="placeholderText">
-                <string>Click Browse to select first ZIP file...</string>
-               </property>
-               <property name="styleSheet">
-                <string>background-color: #fafafa;</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="browseFile1">
-               <property name="text">
-                <string>Browse</string>
-               </property>
-               <property name="minimumWidth">
-                <number>80</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="file2Container">
-           <property name="spacing">
-            <number>8</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="file2Label">
-             <property name="text">
-              <string>File 2</string>
-             </property>
-             <property name="styleSheet">
-              <string>font-weight: bold; color: #0078d4;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="file2Layout">
-             <item>
-              <widget class="QLineEdit" name="file2Path">
-               <property name="readOnly">
-                <bool>true</bool>
-               </property>
-               <property name="placeholderText">
-                <string>Click Browse to select second ZIP file...</string>
-               </property>
-               <property name="styleSheet">
-                <string>background-color: #fafafa;</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="browseFile2">
-               <property name="text">
-                <string>Browse</string>
-               </property>
-               <property name="minimumWidth">
-                <number>80</number>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QPushButton" name="clearFiles">
-           <property name="text">
-            <string>Clear All Files</string>
+           <property name="placeholderText">
+            <string>Click or drag ZIP file here...</string>
            </property>
            <property name="styleSheet">
-            <string>background-color: #dc3545;</string>
+            <string>background-color: #f8fafc; border: 2px dashed #cbd5e1; cursor: pointer;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="file2Label">
+           <property name="text">
+            <string>File 2</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="file2Path">
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+           <property name="placeholderText">
+            <string>Click or drag ZIP file here...</string>
+           </property>
+           <property name="styleSheet">
+            <string>background-color: #f8fafc; border: 2px dashed #cbd5e1; cursor: pointer;</string>
            </property>
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="variantGroup">
-        <property name="title">
-         <string>Car Variant</string>
-        </property>
-        <layout class="QVBoxLayout" name="variantLayout">
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="variantSection">
          <property name="spacing">
           <number>12</number>
          </property>
          <item>
           <widget class="QLabel" name="variantLabel">
            <property name="text">
-            <string>Enter the car variant identifier</string>
-           </property>
-           <property name="styleSheet">
-            <string>color: #666; font-size: 12px;</string>
+            <string>Car Variant</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="carVariantInput">
+          <widget class="QComboBox" name="carVariantCombo">
            <property name="placeholderText">
-            <string>e.g., Model_2024_V1.2</string>
-           </property>
-           <property name="styleSheet">
-            <string>font-size: 14px;</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="variantExample">
-           <property name="text">
-            <string>Example: Model_2024_V1.2</string>
-           </property>
-           <property name="styleSheet">
-            <string>color: #28a745; font-size: 11px; font-style: italic;</string>
+            <string>Select variant...</string>
            </property>
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-     </layout>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="controlSection">
       <property name="spacing">
-       <number>20</number>
+       <number>15</number>
       </property>
+
       <item>
-       <widget class="QPushButton" name="startProcessing">
+       <widget class="QPushButton" name="processButton">
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>60</height>
+          <height>50</height>
          </size>
         </property>
         <property name="text">
          <string>Start Processing</string>
         </property>
         <property name="styleSheet">
-         <string>font-size: 16px; font-weight: bold; background-color: #28a745;</string>
+         <string>font-size: 14px; background-color: #3b82f6;</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="browseDatabase">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>60</height>
-         </size>
+       <widget class="QProgressBar" name="progressBar">
+        <property name="textVisible">
+         <bool>true</bool>
         </property>
-        <property name="text">
-         <string>Browse Database</string>
-        </property>
-        <property name="styleSheet">
-         <string>font-size: 14px; background-color: #17a2b8;</string>
+        <property name="format">
+         <string>%p%</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="newTask">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>60</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>New Task</string>
-        </property>
-        <property name="styleSheet">
-         <string>font-size: 14px; background-color: #ffc107; color: #212529;</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="progressGroup">
-        <property name="title">
-         <string>Progress</string>
-        </property>
-        <layout class="QVBoxLayout" name="progressLayout">
-         <property name="spacing">
-          <number>10</number>
-         </property>
+     </layout>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="logGroup">
+      <property name="title">
+       <string>Progress &amp; Log</string>
+      </property>
+      <layout class="QVBoxLayout" name="logLayout">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="progressLayout">
          <item>
           <widget class="QProgressBar" name="progressBar">
            <property name="textVisible">
             <bool>true</bool>
            </property>
            <property name="format">
-            <string>%p% Complete</string>
+            <string>%p%</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="statusLabel">
+          <widget class="QPushButton" name="openOutputFolder">
            <property name="text">
-            <string>Ready to process</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
+            <string>Open Output</string>
            </property>
            <property name="styleSheet">
-            <string>color: #666; font-size: 12px;</string>
+            <string>background-color: #3b82f6;</string>
            </property>
           </widget>
          </item>
         </layout>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="bottomSection">
-      <property name="spacing">
-       <number>20</number>
-      </property>
-      <item>
-       <widget class="QGroupBox" name="logGroup">
-        <property name="title">
-         <string>Log &amp; Results</string>
-        </property>
-        <layout class="QVBoxLayout" name="logLayout">
-         <property name="spacing">
-          <number>12</number>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="logText">
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
+         <property name="lineWrapMode">
+          <enum>QTextEdit::WidgetWidth</enum>
+         </property>
+         <property name="styleSheet">
+          <string>font-family: Consolas, Monaco, monospace; font-size: 11px; background-color: #f8f9fa;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="outputPathLayout">
          <item>
-          <widget class="QTextEdit" name="logText">
+          <widget class="QLabel" name="outputPathLabel">
+           <property name="text">
+            <string>Output Path:</string>
+           </property>
+           <property name="styleSheet">
+            <string>font-weight: bold;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="outputPath">
            <property name="readOnly">
             <bool>true</bool>
            </property>
-           <property name="lineWrapMode">
-            <enum>QTextEdit::WidgetWidth</enum>
-           </property>
            <property name="styleSheet">
-            <string>font-family: Consolas, Monaco, monospace; font-size: 11px; background-color: #f8f9fa;</string>
+            <string>background-color: #fafafa; font-family: monospace;</string>
            </property>
           </widget>
          </item>
-         <item>
-          <layout class="QHBoxLayout" name="logButtonsLayout">
-           <item>
-            <widget class="QPushButton" name="clearLog">
-             <property name="text">
-              <string>Clear Log</string>
-             </property>
-             <property name="styleSheet">
-              <string>background-color: #6c757d;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="saveLog">
-             <property name="text">
-              <string>Save Log</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="openOutputFolder">
-             <property name="text">
-              <string>Open Output</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="outputPathLayout">
-           <item>
-            <widget class="QLabel" name="outputPathLabel">
-             <property name="text">
-              <string>Output Path:</string>
-             </property>
-             <property name="styleSheet">
-              <string>font-weight: bold;</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="outputPath">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="styleSheet">
-              <string>background-color: #fafafa; font-family: monospace;</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
         </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="searchGroup">
-        <property name="title">
-         <string>Database Search</string>
-        </property>
-        <layout class="QVBoxLayout" name="searchLayout">
-         <property name="spacing">
-          <number>12</number>
-         </property>
-         <item>
-          <layout class="QHBoxLayout" name="searchInputLayout">
-           <item>
-            <widget class="QLineEdit" name="searchInput">
-             <property name="placeholderText">
-              <string>Search projects by name...</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="searchButton">
-             <property name="text">
-              <string>Search</string>
-             </property>
-             <property name="minimumWidth">
-              <number>80</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QTableWidget" name="searchResultsTable">
-           <property name="selectionBehavior">
-            <enum>QAbstractItemView::SelectRows</enum>
-           </property>
-           <property name="sortingEnabled">
-            <bool>true</bool>
-           </property>
-           <property name="alternatingRowColors">
-            <bool>true</bool>
-           </property>
-           <property name="styleSheet">
-            <string>QTableWidget::item {
-    padding: 8px;
-    border-bottom: 1px solid #f0f0f0;
-}
-QTableWidget::item:selected {
-    background-color: #e3f2fd;
-    color: #333;
-}
-QHeaderView::section {
-    background-color: #f8f9fa;
-    padding: 8px;
-    border: none;
-    border-bottom: 2px solid #dee2e6;
-    font-weight: bold;
-}</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="searchButtonsLayout">
-           <item>
-            <widget class="QPushButton" name="openSelected">
-             <property name="text">
-              <string>Open Selected</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="deleteSelected">
-             <property name="text">
-              <string>Delete Selected</string>
-             </property>
-             <property name="styleSheet">
-              <string>background-color: #dc3545;</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
+       </item>
+      </layout>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -541,7 +319,7 @@ QHeaderView::section {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1400</width>
+     <width>1000</width>
      <height>22</height>
     </rect>
    </property>
