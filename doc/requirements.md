@@ -1,14 +1,14 @@
 # 📘 Project Requirements Document - FlashMate
 
 ## 1. Introduction
-**Project Purpose**:  
+**Project Purpose**:
 FlashMate is a GUI tool that simplifies the extraction of firmware files from build archives (.zip), making embedded development workflows faster and less error-prone. Your friendly firmware prep assistant
 
-**Target Users**:  
+**Target Users**:
 - Embedded developers (HW /SW )
-- QA/test engineers  
+- QA/test engineers
 
-**Scope**:  
+**Scope**:
 This project aims to support ZIP file processing, firmware file filtering, and user-friendly file export — all within a desktop GUI.
 
 ---
@@ -47,8 +47,8 @@ This project aims to support ZIP file processing, firmware file filtering, and u
 ## 3. Use Cases
 
 ### 🟦 Use Case: Input Files and Variant
-**Actor**: Developer  
-**Trigger**: User starts the application  
+**Actor**: Developer
+**Trigger**: User starts the application
 
 **Main Flow**:
 1. User opens the application.
@@ -66,8 +66,8 @@ This project aims to support ZIP file processing, firmware file filtering, and u
 ---
 
 ### 🟦 Use Case: Process and Extract Firmware Files
-**Actor**: Developer  
-**Trigger**: User clicks the **Start** button  
+**Actor**: Developer
+**Trigger**: User clicks the **Start** button
 
 **Main Flow**:
 1. Application checks for duplicate folders in Database directory.
@@ -89,9 +89,69 @@ This project aims to support ZIP file processing, firmware file filtering, and u
 
 ---
 
+### 🟦 Use Case: Duplicate Folder Detection and Management
+**Actor**: Developer
+**Trigger**: Before creating output folder structure
+
+**Main Flow**:
+1. Application searches Database directory for folders matching the Car Variant name.
+2. If matching folder found, application retrieves folder information:
+   - Full path
+   - Creation date
+   - Last modification date
+   - Number of files inside
+   - Total folder size
+3. Application displays detailed duplicate warning dialog with:
+   - Existing folder information
+   - Options: "Overwrite", "Create New", "Cancel"
+4. User selects action:
+   - **Overwrite**: Delete existing folder and proceed
+   - **Create New**: Generate unique folder name (e.g., "Variant_20241201_143022")
+   - **Cancel**: Abort the operation
+5. Application logs the decision and proceeds accordingly.
+
+**Exceptions**:
+- Database directory not accessible → show error and abort.
+- Unable to read existing folder information → show basic warning and continue.
+- User cancels operation → return to main interface.
+- Folder deletion fails during overwrite → show error and abort.
+
+---
+
+### 🟦 Use Case: Search and Browse Existing Projects
+**Actor**: Developer
+**Trigger**: User clicks "Browse Database" or similar button
+
+**Main Flow**:
+1. Application scans Database directory for all project folders.
+2. Displays search results in a table/list format showing:
+   - Project name (Car Variant)
+   - Creation date
+   - Last modified date
+   - Number of firmware files
+   - Total project size
+3. User can:
+   - Sort results by any column
+   - Filter by date range
+   - Search by project name
+   - Open selected project folder
+   - Delete selected project (with confirmation)
+4. Application provides summary statistics:
+   - Total projects in database
+   - Total storage used
+   - Oldest and newest projects
+
+**Exceptions**:
+- Database directory not found → create empty database and show message.
+- Permission denied accessing database → show error message.
+- Corrupted project folders → mark as "Error" in list and skip.
+- Search operation times out → show partial results with warning.
+
+---
+
 ### 🟦 Use Case: View Results and Manage Output
-**Actor**: Developer  
-**Trigger**: After processing completes  
+**Actor**: Developer
+**Trigger**: After processing completes
 
 **Main Flow**:
 1. Output folder path is displayed on the screen.
@@ -106,8 +166,8 @@ This project aims to support ZIP file processing, firmware file filtering, and u
 ---
 
 ### 🟦 Use Case: Real-time Status and Logging
-**Actor**: Developer  
-**Trigger**: During any major operation  
+**Actor**: Developer
+**Trigger**: During any major operation
 
 **Main Flow**:
 1. Application shows real-time status messages (validation, extraction, success/failure).
@@ -134,66 +194,3 @@ This project aims to support ZIP file processing, firmware file filtering, and u
 | Scalability & Reliability | Efficient handling of 2 ZIP files/session, robust against file/folder issues |
 
 ---
-
-## 5. Project Milestones (Initial MVP)
-
-| Date | Goal | Description |
-|------|------|-------------|
-| Jul 13 | Initial Setup | Repo, basic GUI, ZIP loader |
-| Jul 20 | Core MVP | Extract, filter, export |
-| Jul 31 | Demo Ready | Clean UI, simple installer |
-
-## 🎉 프로젝트 구조 생성 완료!
-
-FlashMate 프로젝트의 모든 폴더와 파일이 성공적으로 생성되었습니다!
-
-### 📁 생성된 구조 요약:
-
-```
-FlashMate/
-├── 📁 src/                          # 소스 코드
-│   ├── 📁 main.py                   # 🚀 메인 애플리케이션
-│   ├── 📁 ui/                       # UI 관련 모듈
-│   │   ├── 📁 ui_files/             # Qt Designer .ui 파일들
-│   │   ├── 📁 ui_classes/           # UI 클래스들
-│   │   └── 📁 resources/            # 리소스 (아이콘, 스타일 등)
-│   ├── 📁 core/                     # 핵심 비즈니스 로직
-│   ├── 📁 utils/                    # 유틸리티 (constants.py 포함)
-│   └── 📁 models/                   # 데이터 모델
-├── 📁 build/                        # 빌드 관련
-│   ├── 📁 scripts/                  # 빌드 스크립트
-│   ├── 📁 config/                   # 빌드 설정
-│   └── 📁 dist/                     # 빌드 결과물
-├── 📁 scripts/                      # 관리 스크립트
-│   └── 📁 clean.py                  # 정리 스크립트
-├── 📁 sample_data/                  # 테스트용 샘플 데이터
-├── 📁 .vscode/                      # VS Code 설정
-├── 📁 env_config.bat               # 🚀 환경 설정
-├── 📁 run.py                       # 🎯 통합 실행 관리자
-├── 📁 requirements.txt              # Python 의존성
-├── 📁 pyproject.toml               # 프로젝트 설정
-├── 📁 setup.py                     # 패키지 설정
-├──  .pre-commit-config.yaml      # 코드 품질 관리
-└── 📁 README.md                    # 프로젝트 설명
-```
-
-###  다음 단계:
-
-1. **환경 설정 실행:**
-   ```cmd
-   env_config.bat
-   ```
-
-2. **개발 시작:**
-   ```cmd
-   python run.py
-   ```
-
-3. **메뉴에서 선택:**
-   - [1] Run Program - 애플리케이션 실행
-   - [2] Build - 실행파일 빌드
-   - [3] Clean - 프로젝트 정리
-   - [4] Exit - 종료
-
-이제 Qt Designer로 UI를 만들고, 각 모듈을 구현하면 됩니다! 모든 기본 구조가 준비되었습니다. 🎯
-

@@ -1,113 +1,113 @@
 @echo off
 chcp 65001 >nul
 echo ========================================
-echo    FlashMate 환경 설정
+echo    FlashMate Environment Setup
 echo ========================================
 echo.
 
-:: Python 설치 확인
-echo Python 설치 확인 중...
+:: Check Python installation
+echo Checking Python installation...
 python --version >nul 2>&1
 if errorlevel 1 (
-    echo ❌ Python이 설치되어 있지 않습니다.
-    echo Python 3.8 이상을 설치해주세요: https://www.python.org/downloads/
-    echo 설치 시 "Add Python to PATH" 옵션을 체크해주세요.
+    echo ERROR: Python is not installed.
+    echo Please install Python 3.8 or higher: https://www.python.org/downloads/
+    echo Make sure to check "Add Python to PATH" during installation.
     pause
     exit /b 1
 )
 
 for /f "tokens=2" %%i in ('python --version 2^>^&1') do set PYTHON_VERSION=%%i
-echo ✅ Python %PYTHON_VERSION% 발견
+echo SUCCESS: Python %PYTHON_VERSION% found
 
-:: 가상환경 존재 여부 확인
+:: Check if virtual environment exists
 if exist "venv" (
     echo.
-    echo ✅ 기존 가상환경이 발견되었습니다.
-    echo 🔄 가상환경을 활성화합니다...
+    echo SUCCESS: Existing virtual environment found.
+    echo PROCESSING: Activating virtual environment...
     call "venv\Scripts\activate.bat"
     if errorlevel 1 (
-        echo ❌ 가상환경 활성화 실패
-        echo 가상환경을 다시 생성합니다...
+        echo ERROR: Failed to activate virtual environment
+        echo Creating new virtual environment...
         goto :create_venv
     )
-    echo ✅ 가상환경 활성화 완료
+    echo SUCCESS: Virtual environment activated successfully
     goto :ask_run
 )
 
 :create_venv
 echo.
-echo 🔄 가상환경 생성 중...
+echo PROCESSING: Creating virtual environment...
 python -m venv venv
 if errorlevel 1 (
-    echo ❌ 가상환경 생성 실패
+    echo ERROR: Failed to create virtual environment
     pause
     exit /b 1
 )
-echo ✅ 가상환경 생성 완료
+echo SUCCESS: Virtual environment created successfully
 
-:: 가상환경 활성화
+:: Activate virtual environment
 echo.
-echo 가상환경 활성화 중...
+echo Activating virtual environment...
 call "venv\Scripts\activate.bat"
 if errorlevel 1 (
-    echo ❌ 가상환경 활성화 실패
+    echo ERROR: Failed to activate virtual environment
     pause
     exit /b 1
 )
-echo ✅ 가상환경 활성화 완료
+echo SUCCESS: Virtual environment activated successfully
 
-:: pip 업그레이드
+:: Upgrade pip
 echo.
-echo 🔄 pip 업그레이드 중...
+echo PROCESSING: Upgrading pip...
 python -m pip install --upgrade pip
 if errorlevel 1 (
-    echo ⚠️  pip 업그레이드 실패 (계속 진행)
+    echo WARNING: Failed to upgrade pip (continuing...)
 )
 
-:: 의존성 설치
+:: Install dependencies
 echo.
-echo 📦 의존성 설치 중...
+echo INSTALLING: Installing dependencies...
 pip install -r requirements.txt
 if errorlevel 1 (
-    echo ❌ 의존성 설치 실패
+    echo ERROR: Failed to install dependencies
     pause
     exit /b 1
 )
-echo ✅ 의존성 설치 완료
+echo SUCCESS: Dependencies installed successfully
 
-:: 개발 모드 설치
+:: Install in development mode
 echo.
-echo 🔧 개발 모드 설치 중...
+echo INSTALLING: Installing in development mode...
 pip install -e .
 if errorlevel 1 (
-    echo ❌ 개발 모드 설치 실패
+    echo ERROR: Failed to install in development mode
     pause
     exit /b 1
 )
-echo ✅ 개발 모드 설치 완료
+echo SUCCESS: Development mode installation completed
 
 :ask_run
 echo.
 echo ========================================
-echo    🎉 환경 설정 완료!
+echo    SUCCESS: Environment setup completed!
 echo ========================================
 echo.
-echo 애플리케이션을 실행하시겠습니까?
+echo Would you like to run the application?
 echo.
-echo [1] 실행
-echo [2] 종료
+echo [1] Run
+echo [2] Exit
 echo.
-set /p choice="선택하세요 (1 또는 2): "
+set /p choice="Please select (1 or 2): "
 
 if "%choice%"=="1" (
     echo.
-    echo 🚀 FlashMate를 실행합니다...
+    echo STARTING: Starting FlashMate...
     python run.py
 ) else (
     echo.
-    echo 다음 명령어로 실행할 수 있습니다:
+    echo You can run the application with:
     echo   python run.py
     echo.
     echo ========================================
     pause
-) 
+)
