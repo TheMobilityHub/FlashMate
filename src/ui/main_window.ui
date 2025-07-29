@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>700</height>
+    <width>700</width>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -140,104 +140,64 @@ QLabel {
           <number>12</number>
          </property>
          <item>
-          <widget class="QLabel" name="file1Label">
-           <property name="text">
-            <string>File 1</string>
+          <widget class="QLineEdit" name="TV2Path">
+           <property name="styleSheet">
+            <string>background-color: #f8fafc; border: 2px dashed #cbd5e1;</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="file1Path">
            <property name="readOnly">
             <bool>true</bool>
            </property>
            <property name="placeholderText">
-            <string>Click or drag ZIP file here...</string>
+            <string>Click or Drag TV2 Zip file here...</string>
            </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="BleR5Path">
            <property name="styleSheet">
-            <string>background-color: #f8fafc; border: 2px dashed #cbd5e1; cursor: pointer;</string>
+            <string>background-color: #f8fafc; border: 2px dashed #cbd5e1;</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="file2Label">
-           <property name="text">
-            <string>File 2</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="file2Path">
            <property name="readOnly">
             <bool>true</bool>
            </property>
            <property name="placeholderText">
-            <string>Click or drag ZIP file here...</string>
-           </property>
-           <property name="styleSheet">
-            <string>background-color: #f8fafc; border: 2px dashed #cbd5e1; cursor: pointer;</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="variantSection">
-         <property name="spacing">
-          <number>12</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="variantLabel">
-           <property name="text">
-            <string>Car Variant</string>
+            <string>Click or Drag BLE/R5 Zip file here...</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QComboBox" name="carVariantCombo">
            <property name="placeholderText">
-            <string>Select variant...</string>
+            <string>Select Car Variant</string>
            </property>
           </widget>
          </item>
         </layout>
        </item>
+       <item>
+        <widget class="QPushButton" name="processButton">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>120</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>120</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string>font-size: 16px; font-weight: bold; background-color: #3b82f6; text-align: center; padding: 15px; line-height: 1.3; letter-spacing: 1px;</string>
+         </property>
+         <property name="text">
+          <string>START</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="controlSection">
-      <property name="spacing">
-       <number>15</number>
-      </property>
-
-      <item>
-       <widget class="QPushButton" name="processButton">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Start Processing</string>
-        </property>
-        <property name="styleSheet">
-         <string>font-size: 14px; background-color: #3b82f6;</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QProgressBar" name="progressBar">
-        <property name="textVisible">
-         <bool>true</bool>
-        </property>
-        <property name="format">
-         <string>%p%</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </item>
     <item>
      <widget class="QGroupBox" name="logGroup">
@@ -262,11 +222,11 @@ QLabel {
          </item>
          <item>
           <widget class="QPushButton" name="openOutputFolder">
-           <property name="text">
-            <string>Open Output</string>
-           </property>
            <property name="styleSheet">
             <string>background-color: #3b82f6;</string>
+           </property>
+           <property name="text">
+            <string>Open Output</string>
            </property>
           </widget>
          </item>
@@ -274,14 +234,14 @@ QLabel {
        </item>
        <item>
         <widget class="QTextEdit" name="logText">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="lineWrapMode">
-          <enum>QTextEdit::WidgetWidth</enum>
-         </property>
          <property name="styleSheet">
           <string>font-family: Consolas, Monaco, monospace; font-size: 11px; background-color: #f8f9fa;</string>
+         </property>
+         <property name="lineWrapMode">
+          <enum>QTextEdit::LineWrapMode::WidgetWidth</enum>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -289,21 +249,21 @@ QLabel {
         <layout class="QHBoxLayout" name="outputPathLayout">
          <item>
           <widget class="QLabel" name="outputPathLabel">
-           <property name="text">
-            <string>Output Path:</string>
-           </property>
            <property name="styleSheet">
             <string>font-weight: bold;</string>
+           </property>
+           <property name="text">
+            <string>Output Path:</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLineEdit" name="outputPath">
-           <property name="readOnly">
-            <bool>true</bool>
-           </property>
            <property name="styleSheet">
             <string>background-color: #fafafa; font-family: monospace;</string>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -313,16 +273,6 @@ QLabel {
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1000</width>
-     <height>22</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

@@ -48,61 +48,7 @@ def run_program():
     return True
 
 
-def build_program():
-    print("Starting FlashMate build...")
-    print()
-    try:
-        build_script = Path(__file__).parent / "build" / "scripts" / "build.py"
-        if not build_script.exists():
-            print("Build script not found.")
-            input("Press Enter to exit...")
-            return False
-        result = subprocess.run(
-            [sys.executable, str(build_script)],
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-        )
-        if result.returncode == 0:
-            print("Build completed!")
-            print("Executable location: build/dist/FlashMate.exe")
-        else:
-            print("Build failed:")
-            print(result.stderr)
-        input("Press Enter to continue...")
-        return True
-    except Exception as e:
-        print(f"Build error: {e}")
-        input("Press Enter to exit...")
-        return False
 
-
-def clean_project():
-    print("Starting FlashMate project clean...")
-    print()
-    try:
-        clean_script = Path(__file__).parent / "scripts" / "clean.py"
-        if not clean_script.exists():
-            print("Clean script not found.")
-            input("Press Enter to exit...")
-            return False
-        result = subprocess.run(
-            [sys.executable, str(clean_script)],
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-        )
-        if result.returncode == 0:
-            print("Clean completed!")
-        else:
-            print("Clean failed:")
-            print(result.stderr)
-        input("Press Enter to continue...")
-        return True
-    except Exception as e:
-        print(f"Clean error: {e}")
-        input("Press Enter to exit...")
-        return False
 
 
 def run_designer():
@@ -139,21 +85,19 @@ def show_menu():
     print("Please select one of the following options:")
     print()
     print("[1] Run Program    - Run the application")
-    print("[2] Build          - Build executable")
-    print("[3] Clean          - Clean project")
-    print("[4] Qt Designer    - Open UI designer")
-    print("[5] Exit           - Exit")
+    print("[2] Qt Designer    - Open UI designer")
+    print("[3] Exit           - Exit")
     print()
 
 
 def get_user_choice():
     while True:
         try:
-            choice = input("Select (1-5): ").strip()
-            if choice in ["1", "2", "3", "4", "5"]:
+            choice = input("Select (1-3): ").strip()
+            if choice in ["1", "2", "3"]:
                 return choice
             else:
-                print("Please select between 1 and 5.")
+                print("Please select between 1 and 3.")
         except KeyboardInterrupt:
             print("\n\nExiting program.")
             sys.exit(0)
@@ -170,12 +114,8 @@ def main():
         if choice == "1":
             run_program()
         elif choice == "2":
-            build_program()
-        elif choice == "3":
-            clean_project()
-        elif choice == "4":
             run_designer()
-        elif choice == "5":
+        elif choice == "3":
             print("Exiting program.")
             break
     return 0
