@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowQVBXhg.ui'
+## Form generated from reading UI file 'main_windowCSyBQT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.1
 ##
@@ -41,12 +41,14 @@ class Ui_MainWindow(object):
         self.fileSection.setObjectName(u"fileSection")
         self.TV2Path = QLineEdit(self.inputGroup)
         self.TV2Path.setObjectName(u"TV2Path")
+        self.TV2Path.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.TV2Path.setReadOnly(True)
 
         self.fileSection.addWidget(self.TV2Path)
 
         self.BleR5Path = QLineEdit(self.inputGroup)
         self.BleR5Path.setObjectName(u"BleR5Path")
+        self.BleR5Path.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.BleR5Path.setReadOnly(True)
 
         self.fileSection.addWidget(self.BleR5Path)
@@ -225,9 +227,9 @@ class Ui_MainWindow(object):
 "}", None))
         self.inputGroup.setTitle(QCoreApplication.translate("MainWindow", u"Input", None))
         self.TV2Path.setStyleSheet(QCoreApplication.translate("MainWindow", u"background-color: #f8fafc; border: 2px dashed #cbd5e1;", None))
-        self.TV2Path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Click or Drag TV2 Zip file here...", None))
+        self.TV2Path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Click to add TV2 Zip file here...", None))
         self.BleR5Path.setStyleSheet(QCoreApplication.translate("MainWindow", u"background-color: #f8fafc; border: 2px dashed #cbd5e1;", None))
-        self.BleR5Path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Click or Drag BLE/R5 Zip file here...", None))
+        self.BleR5Path.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Click to add BLE/R5 Zip file here...", None))
         self.carVariantCombo.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Select Car Variant", None))
         self.processButton.setStyleSheet(QCoreApplication.translate("MainWindow", u"font-size: 16px; font-weight: bold; background-color: #3b82f6; text-align: center; padding: 15px; line-height: 1.3; letter-spacing: 1px;", None))
         self.processButton.setText(QCoreApplication.translate("MainWindow", u"START", None))

@@ -141,6 +141,9 @@ QLabel {
          </property>
          <item>
           <widget class="QLineEdit" name="TV2Path">
+           <property name="focusPolicy">
+            <enum>Qt::FocusPolicy::NoFocus</enum>
+           </property>
            <property name="styleSheet">
             <string>background-color: #f8fafc; border: 2px dashed #cbd5e1;</string>
            </property>
@@ -148,12 +151,15 @@ QLabel {
             <bool>true</bool>
            </property>
            <property name="placeholderText">
-            <string>Click or Drag TV2 Zip file here...</string>
+            <string>Click to add TV2 Zip file here...</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLineEdit" name="BleR5Path">
+           <property name="focusPolicy">
+            <enum>Qt::FocusPolicy::NoFocus</enum>
+           </property>
            <property name="styleSheet">
             <string>background-color: #f8fafc; border: 2px dashed #cbd5e1;</string>
            </property>
@@ -161,7 +167,7 @@ QLabel {
             <bool>true</bool>
            </property>
            <property name="placeholderText">
-            <string>Click or Drag BLE/R5 Zip file here...</string>
+            <string>Click to add BLE/R5 Zip file here...</string>
            </property>
           </widget>
          </item>
